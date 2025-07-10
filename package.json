@@ -1,0 +1,12 @@
+{
+  "name": "wooyongleeresume",
+  "version": "1.0.0",
+  "description": "My resume website",
+  "main": "index.html",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.0"
+  }
+}
