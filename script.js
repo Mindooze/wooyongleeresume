@@ -67,6 +67,7 @@ const certModalClose = document.getElementById('cert-modal-close');
 certCards.forEach(card => {
     card.addEventListener('click', () => {
         const certId = card.dataset.certId;
+        certModal.dataset.currentCertId = certId; // Store current certId
         const lang = document.body.getAttribute('lang') || 'ko';
         
         const titleKey = `cert_modal_title_${certId}`;
@@ -95,46 +96,88 @@ certModal.addEventListener('click', (e) => {
 // Project Modal Logic
 const projectsData = {
     furball: {
-        title: '털뭉치 수색대 (Furball Rangers)',
-        description: 'Awaiting description...',
+        title: {
+            ko: '털뭉치 수색대 (Furball Rangers)',
+            en: 'Furball Rangers'
+        },
+        description: {
+            ko: "기획부터 개발, 테스트 및 배포까지 모두 홀로 수행. 반려동물을 잃어버린 보호자들이 더 쉽게 잃어버린 가족을 추적하고 이동 경로를 파악하여 빠르게 다시 만날 수 있도록 돕는 프로젝트",
+            en: "A solo project from planning to development, testing, and deployment. It helps pet owners who have lost their pets to track them more easily and identify their movement paths to be reunited with their lost family members quickly."
+        },
         images: ['assets/eng-full.png', 'assets/kor-full.png', 'assets/kor-admin.png', 'assets/eng-veri.png', 'assets/kor-mob.png', 'assets/project-map.png'],
         buttons: [
             { text: 'Live Demo', url: 'http://furballrangers.replit.app' }
         ]
     },
     aiworkflow: {
-        title: 'AI 자동화 워크플로우',
-        description: 'Awaiting description...',
+        title: {
+            ko: 'AI 자동화 워크플로우',
+            en: 'AI Automation Workflow'
+        },
+        description: {
+            ko: "HTTP 및 외부 API 활용 통한 크롤링, 에이전틱 워크플로우, 업무 자동화 등 다양한 AI 활용 방식 학습/체득",
+            en: "Learned and mastered various AI application methods such as crawling using HTTP and external APIs, agentic workflows, and work automation."
+        },
         images: ['assets/n8nfront.png', 'assets/n8nworkflow1.png', 'assets/n8nworkflow2.png', 'assets/n8nworkflow3.png'],
         buttons: []
     },
     resume: {
-        title: '인터랙티브 웹 이력서',
-        description: 'Awaiting description...',
+        title: {
+            ko: '인터랙티브 웹 이력서',
+            en: 'Interactive Web Resume'
+        },
+        description: {
+            ko: "VS code와 Cline, 관련 MCP 활용하여 이력서 및 포트폴리오 구축",
+            en: "Built a resume and portfolio using VS Code, Cline, and related MCPs."
+        },
         images: ['assets/resumesite.png'],
         buttons: []
     },
     insomnia: {
-        title: '국내 최초 디지털 치료제 개발',
-        description: 'Awaiting description...',
+        title: {
+            ko: '국내 최초 디지털 치료제 개발',
+            en: "Korea's First Digital Therapeutics Development"
+        },
+        description: {
+            ko: "국내 최초로 식약처 인허가를 통과하여 처방되고 있는 불면증 소프트웨어 치료기기 개발",
+            en: "Developed Korea's first software medical device for insomnia, which has been approved by the Ministry of Food and Drug Safety and is being prescribed."
+        },
         images: ['assets/insomnia0.png', 'assets/insomnia.png', 'assets/insomnia1.png', 'assets/insomnia2.png', 'assets/insomnia3.png'],
         buttons: []
     },
     vr: {
-        title: 'VR 기반 작업치료 플랫폼',
-        description: 'Awaiting description...',
+        title: {
+            ko: 'VR 기반 작업치료 플랫폼',
+            en: 'VR-based Occupational Therapy Platform'
+        },
+        description: {
+            ko: "가상 환경에서 작업치료사가 직접 치료를 기획하고 수행하며 정밀하게 치료 경과를 측정하는 전천후 치료 플랫폼 개발을 기획, 총괄",
+            en: "Planned and supervised the development of an all-in-one therapy platform where occupational therapists can directly plan and conduct treatment in a virtual environment and precisely measure treatment progress."
+        },
         images: ['assets/VR.png', 'assets/VR1.png', 'assets/VR2.png', 'assets/VR3.png'],
         buttons: []
     },
     adhd: {
-        title: 'ADHD 아동용 DTx 앱',
-        description: 'Awaiting description...',
+        title: {
+            ko: 'ADHD 아동용 DTx 앱',
+            en: 'DTx App for Children with ADHD'
+        },
+        description: {
+            ko: "작업기억력을 향상하기 위해 다중작업을 훈련하게 하는 시리어스 게임 형태의 소프트웨어 치료기기 개발 및 주요 지표 기획",
+            en: "Developed a serious game-style software medical device that trains multitasking to improve working memory for children with ADHD, and planned key metrics."
+        },
         images: ['assets/adhd.png', 'assets/adhd1.png', 'assets/adhd2.png'],
         buttons: []
     },
     dementia: {
-        title: '치매 환자용 테스트/훈련 앱',
-        description: 'Awaiting description...',
+        title: {
+            ko: '치매 환자용 테스트/훈련 앱',
+            en: 'Test/Training App for Dementia Patients'
+        },
+        description: {
+            ko: "치매 전단계부터 빠르게 기억력 감퇴를 진단하고 기억력을 유지, 발전시킬 수 있는 전략을 모바일 앱 형태로 구현하는 PoC 프로젝트 기획/PM",
+            en: "Planned and managed a PoC project to quickly diagnose memory decline from the pre-dementia stage and implement strategies to maintain and improve memory in the form of a mobile app."
+        },
         images: ['assets/cover_brainfit.png', 'assets/brainfit1.png', 'assets/brainfit2.png'],
         buttons: []
     }
@@ -201,10 +244,12 @@ function showImage(project, index) {
 projectCards.forEach(card => {
     card.addEventListener('click', () => {
         const projectId = card.dataset.projectId;
+        projectModal.dataset.currentProjectId = projectId; // Store current projectId
         const project = projectsData[projectId];
+        const lang = document.body.getAttribute('lang') || 'ko';
         if (project) {
-            projectModalTitle.textContent = project.title;
-            projectModalDesc.textContent = project.description;
+            projectModalTitle.textContent = project.title[lang];
+            projectModalDesc.textContent = project.description[lang];
             currentImageIndex = 0;
             showImage(project, currentImageIndex);
             projectModal.classList.remove('hidden');
@@ -227,14 +272,6 @@ projectModal.addEventListener('click', (e) => {
 
 // Language Toggle
 const langToggle = document.getElementById('lang-toggle');
-let translations = {};
-
-async function loadTranslations() {
-    const response = await fetch('translations.json');
-    translations = await response.json();
-    const lang = localStorage.getItem('language') || 'ko';
-    setLanguage(lang);
-}
 
 function setLanguage(lang) {
     document.body.setAttribute('lang', lang);
@@ -247,6 +284,27 @@ function setLanguage(lang) {
             el.innerHTML = translations[lang][key];
         }
     });
+
+    // Update project modal if it's open
+    if (!projectModal.classList.contains('hidden')) {
+        const projectId = projectModal.dataset.currentProjectId;
+        if (projectId) {
+            const project = projectsData[projectId];
+            projectModalTitle.textContent = project.title[lang];
+            projectModalDesc.textContent = project.description[lang];
+        }
+    }
+
+    // Update certification modal if it's open
+    if (!certModal.classList.contains('hidden')) {
+        const certId = certModal.dataset.currentCertId;
+        if (certId) {
+            const titleKey = `cert_modal_title_${certId}`;
+            const descKey = `cert_modal_desc_${certId}`;
+            modalTitle.textContent = translations[lang][titleKey];
+            modalDesc.textContent = translations[lang][descKey];
+        }
+    }
 }
 
 langToggle.addEventListener('click', () => {
@@ -255,4 +313,6 @@ langToggle.addEventListener('click', () => {
     setLanguage(newLang);
 });
 
-loadTranslations();
+// Initial language setup
+const initialLang = localStorage.getItem('language') || 'ko';
+setLanguage(initialLang);
